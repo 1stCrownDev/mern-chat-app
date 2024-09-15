@@ -1,22 +1,21 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
 const app = express();
-const cors = require('cors');
-const { default: mongoose } = require('mongoose');
+import { createServer } from 'http';
+import cors from 'cors';
+//import { mongoose } from 'mongoose';
 const server = createServer(app);
-const createServer = require('http');
 
-require('dotenv').config();
-const PORT = process.env.PORT || 5600;
+dotenv.config();
+const PORT = process.env.PORT || 5000;
 
 // Mongo DB Connections
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(response=>{
+/*
+mongoose.connect(process.env.MONGODB_URI).then(response=>{
     console.log('MongoDB Connection Succeeded.')
 }).catch(error=>{
     console.log('Error in DB connection: ' + error)
-});
+});*/
 
 
 // Middleware Connections
@@ -32,5 +31,5 @@ app.get("/", (req, res) => {
 
 // Connection
 app.listen(PORT, ()=>{
-    console.log('App running in port: '+PORT)
+    console.log(`App running on Port: ${PORT}`)
 })
