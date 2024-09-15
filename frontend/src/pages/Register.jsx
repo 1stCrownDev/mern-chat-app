@@ -5,9 +5,33 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Register = () => {
+  const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const getUserFromLocalStorage = () => {
+    const result = localStorage.getItem("user");
+    const user = result ? JSON.parse(result) : null;
+    return user;
+  };
+
+  useEffect(() => {
+    if (getUserFromLocalStorage("user")) {
+      setIsAuthenticated(true)
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleRegister = async (e) => {
-    
+    e.preventDefault();
+
+    try {
+      
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -44,7 +68,21 @@ const Register = () => {
         />
 
         <div className="button-container">
-          <button type="submit" className='btn'>Register</button>
+          <button 
+            type="submit" 
+            className='btn'
+          >
+            Register
+          </button>
+          <button 
+            className='btn' 
+            onClick={() => {
+            console.log("Nav to login")
+            Navigate("/")
+          }}
+          >
+            Log In
+          </button>
         </div>
       </form>
     </div>
